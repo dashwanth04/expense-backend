@@ -8,9 +8,13 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:4200", "https://expense-backend-zzk0.onrender.com"],
+  origin: [
+    "http://localhost:4200",
+    "https://expense-tracker-gules-zeta.vercel.app"
+  ],
   credentials: true
 }));
+
 app.use(express.json());
 
 // ✅ Root route
