@@ -9,7 +9,6 @@ const app = express();
 
 app.use(cors({
   origin: [
-    "http://localhost:4200",
     "https://expense-tracker-gules-zeta.vercel.app"
   ],
   methods: "GET,POST,PUT,DELETE",
