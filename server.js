@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import expenseRoutes from "./routes/expenseRoutes.js";
 
 dotenv.config();
@@ -13,20 +15,23 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// ✅ Root route
-app.get("/", (req, res) => {
-  res.send("Server is running ✅");
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// API Routes
+// Serve Angular app
+app.use(express.static(path.join(__dirname, "../dist/expense-tracker")));
+
 app.use("/api/expenses", expenseRoutes);
 
-// DB Connect
+// ⭐ Catch-all to Angular
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/expense-tracker/index.html"));
+});
+
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.log(err));
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.log("❌ DB Error:", err));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
