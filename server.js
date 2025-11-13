@@ -7,11 +7,11 @@ import expenseRoutes from "./routes/expenseRoutes.js";
 dotenv.config();
 const app = express();
 
-// ✅ CORS FIX — Remove trailing slash in origin
+// ✅ Updated CORS with your correct Vercel domain
 app.use(
   cors({
     origin: [
-      "https://expense-tracker-ny6n0lmw3-dashwanth04s-projects.vercel.app"
+      "https://expense-tracker-kfss90uhe-dashwanth04s-projects.vercel.app"
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
@@ -28,9 +28,9 @@ app.get("/", (req, res) => {
 // API Routes
 app.use("/api/expenses", expenseRoutes);
 
-// ✅ FIX: Use correct environment variable name
+// DB Connect
 mongoose
-  .connect(process.env.MONGO_URI)   // <----- Corrected
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("MongoDB Error:", err));
 
