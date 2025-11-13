@@ -11,7 +11,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://expense-tracker-kfss90uhe-dashwanth04s-projects.vercel.app"
+      "https://expense-tracker-1bigqd888-dashwanth04s-projects.vercel.app/"
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
